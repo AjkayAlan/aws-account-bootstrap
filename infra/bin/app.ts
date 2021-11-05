@@ -8,7 +8,7 @@ export class App extends cdk.App {
     super();
 
     new ProdStage(this, 'ProdStage', {
-      repos: ['AjkayAlan/aws-account-bootstrap'],
+      repos: ['AjkayAlan/aws-account-bootstrap', 'AjkayAlan/alankay.net-v2'],
       cicdAccessRoleName: 'GitHubActionsCICDAccess',
       env: {
         account: '590668874907',
