@@ -7,7 +7,12 @@ export class App extends cdk.App {
   constructor() {
     super();
 
-    new ProdStage(this, 'ProdStage');
+    new ProdStage(this, 'ProdStage', {
+      env: {
+        account: '590668874907',
+        region: 'us-east-1',
+      },
+    });
   }
 }
 
