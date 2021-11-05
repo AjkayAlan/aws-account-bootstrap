@@ -14,8 +14,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    # permissions:
-    #   contents: read
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -54,14 +54,18 @@ jobs:
     name: Deploy To Prod
     runs-on: ubuntu-latest
     needs: build
-    # permissions:
-    #   contents: read
-    #   id-token: write
+    permissions:
+      contents: read
+      id-token: write
     env:
       AWS_REGION: us-east-1
       AWS_ACCOUNT_ID: 590668874907
       AWS_ROLE_NAME: GitHubActionsCICDAccess
     steps:
+      # Include this for now cause NPM fails if nothing is checked out?
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Download CDK output
         uses: actions/download-artifact@v2
         with:
@@ -85,4 +89,4 @@ jobs:
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_ROLE_NAME }}
 
       - name: Deploy
-        run: cdk deploy 'ProdStage/*' --require-approval never
+        run: cdk deploy --app 'cdk.out/' 'ProdStage/*' --require-approval never
