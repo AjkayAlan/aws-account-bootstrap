@@ -17,6 +17,7 @@ All foundational things I need for my personal AWS account
 4. Deploy the app manually so further GitHub actions access works as expected (you only need to do this once):
 
    ```sh
+   cd infra
    cdk synth
    cdk deploy 'ProdStage/*'
    ```
