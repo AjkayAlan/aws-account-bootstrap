@@ -80,7 +80,9 @@ jobs:
         run: npm install -g npm
 
       - name: Install cdk
-        run: npm install -g aws-cdk
+        run: |
+          npm install -g aws-cdk
+          ls -R
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
