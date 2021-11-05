@@ -69,6 +69,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: cdk-out
+          path: cdk-out
 
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -90,4 +91,4 @@ jobs:
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_ROLE_NAME }}
 
       - name: Deploy
-        run: cdk deploy --app 'cdk.out/' 'ProdStage/*' --require-approval never
+        run: cdk deploy --app 'cdk.out/ProdStage/*' --require-approval never
