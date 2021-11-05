@@ -60,7 +60,11 @@ jobs:
     env:
       AWS_REGION: us-east-1
       AWS_ACCOUNT_ID: 590668874907
+      AWS_ROLE_NAME: GitHubActionsCICDAccess
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Download CDK output
         uses: actions/download-artifact@v2
         with:
@@ -81,7 +85,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@master
         with:
           aws-region: ${{ env.AWS_REGION }}
-          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/my-github-actions-role
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_ROLE_NAME }}
 
       - name: Deploy
         run: cdk deploy 'ProdStage/*' --require-approval never
