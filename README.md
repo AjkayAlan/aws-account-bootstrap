@@ -8,7 +8,7 @@ All foundational things I need for my personal AWS account
 
    - Your account id (replace `590668874907`)
    - Your region (replace `us-east-1`)
-   - Your bootstrap repo name (replace `AjkayAlan/aws-account-bootstrap`)
+   - Your repos that need access (remember to include your bootstrap repo name such as `AjkayAlan/aws-account-bootstrap`!)
 
 2. Update the [IAM Role policy](infra/lib/stacks/github-actions-cicd-access-stack.ts) to fit your needs
 
@@ -23,3 +23,7 @@ All foundational things I need for my personal AWS account
    ```
 
 After your stack deploys, the included github actions should work without issue.
+
+## Allowing other repos to deploy to your account
+
+Just add the repos to the list in the [app.ts](infra/bin/app.ts), and let the action run to deploy the update to your account.

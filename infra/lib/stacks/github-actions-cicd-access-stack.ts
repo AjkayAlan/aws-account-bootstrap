@@ -1,12 +1,12 @@
-import * as cdk from '@aws-cdk/core';
 import {
+  Effect,
   OpenIdConnectProvider,
+  PolicyDocument,
+  PolicyStatement,
   Role,
   WebIdentityPrincipal,
-  PolicyStatement,
-  PolicyDocument,
-  Effect,
 } from '@aws-cdk/aws-iam';
+import * as cdk from '@aws-cdk/core';
 
 export interface GitHubActionsCICDAccessStageProps extends cdk.StackProps {
   repos: string[];

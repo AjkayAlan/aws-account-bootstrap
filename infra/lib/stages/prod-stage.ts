@@ -1,4 +1,5 @@
 import { Construct, Stage, StageProps } from '@aws-cdk/core';
+
 import { GitHubActionsCICDAccessStack } from '../stacks/github-actions-cicd-access-stack';
 
 export interface ProdStageProps extends StageProps {
