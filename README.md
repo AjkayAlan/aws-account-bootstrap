@@ -4,11 +4,13 @@ All foundational things I need for my personal AWS account
 
 ## Using this repo with GitHub Actions
 
-Update this project with the following changes to fit your environment:
+Update the [app.ts](infra/bin/app.ts) to fit your environment:
 
 1. Your account id (replace `590668874907`)
 2. Your region (replace `us-east-1`)
 3. Your bootstrap repo name (replace `AjkayAlan/aws-account-bootstrap`)
+
+Update the [IAM Role policy](infra/lib/stacks/github-actions-cicd-access-stack.ts) to fit your needs
 
 Then sign into the AWS CLI and bootstrap your AWS account by running `cdk bootstrap`.
 

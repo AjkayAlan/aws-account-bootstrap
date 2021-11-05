@@ -8,6 +8,7 @@ export class App extends cdk.App {
     super();
 
     new ProdStage(this, 'ProdStage', {
+      repos: ['AjkayAlan/aws-account-bootstrap'],
       env: {
         account: '590668874907',
         region: 'us-east-1',

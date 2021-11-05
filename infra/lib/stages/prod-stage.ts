@@ -1,12 +1,17 @@
 import { Construct, Stage, StageProps } from '@aws-cdk/core';
-import { CICDAccessStack } from '../stacks/cicd-access-stack';
+import { GitHubActionsCICDAccessStack } from '../stacks/github-actions-cicd-access-stack';
+
+export interface ProdStageProps extends StageProps {
+  repos: string[];
+}
 
 export class ProdStage extends Stage {
-  constructor(scope: Construct, id: string, props: StageProps) {
+  constructor(scope: Construct, id: string, props: ProdStageProps) {
     super(scope, id, props);
 
-    new CICDAccessStack(this, 'CICDAccessStack', {
+    new GitHubActionsCICDAccessStack(this, 'CICDAccessStack', {
       env: props.env,
+      repos: props.repos,
     });
   }
 }
