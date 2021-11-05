@@ -80,9 +80,7 @@ jobs:
         run: npm install -g npm
 
       - name: Install cdk
-        run: |
-          npm install -g aws-cdk
-          ls -R
+        run: npm install -g aws-cdk
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
@@ -91,4 +89,4 @@ jobs:
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_ROLE_NAME }}
 
       - name: Deploy
-        run: cdk deploy --app 'cdk.out/ProdStage/*' --require-approval never
+        run: cdk deploy --app 'cdk.out/' 'ProdStage/*' --require-approval never
