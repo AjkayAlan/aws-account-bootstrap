@@ -10,6 +10,7 @@ import {
 
 export interface GitHubActionsCICDAccessStageProps extends cdk.StackProps {
   repos: string[];
+  cicdAccessRoleName: string;
 }
 
 export class GitHubActionsCICDAccessStack extends cdk.Stack {
@@ -25,7 +26,7 @@ export class GitHubActionsCICDAccessStack extends cdk.Stack {
     });
 
     new Role(this, 'GitHubActionsCICDAccessRole', {
-      roleName: 'GitHubActionsCICDAccess',
+      roleName: props.cicdAccessRoleName,
       assumedBy: new WebIdentityPrincipal(ghToAWSOIDC.openIdConnectProviderArn, {
         'ForAnyValue:StringLike': {
           [`${domain}:sub`]: props.repos.map((repo) => `repo:${repo}:*`),

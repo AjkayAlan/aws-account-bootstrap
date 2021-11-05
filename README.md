@@ -4,7 +4,7 @@ All foundational things I need for my personal AWS account
 
 ## Using this repo with GitHub Actions
 
-Update the [app.ts](infra/bin/app.ts) to fit your environment:
+Update the [app.ts](infra/bin/app.ts) and the [workflow](.github/workflows/build-and-deploy.yaml) to fit your environment:
 
 1. Your account id (replace `590668874907`)
 2. Your region (replace `us-east-1`)

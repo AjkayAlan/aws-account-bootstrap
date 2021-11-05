@@ -3,6 +3,7 @@ import { GitHubActionsCICDAccessStack } from '../stacks/github-actions-cicd-acce
 
 export interface ProdStageProps extends StageProps {
   repos: string[];
+  cicdAccessRoleName: string;
 }
 
 export class ProdStage extends Stage {
@@ -12,6 +13,7 @@ export class ProdStage extends Stage {
     new GitHubActionsCICDAccessStack(this, 'CICDAccessStack', {
       env: props.env,
       repos: props.repos,
+      cicdAccessRoleName: props.cicdAccessRoleName,
     });
   }
 }

@@ -43,12 +43,28 @@ jobs:
       - name: Synth
         run: cdk synth
 
+      - name: Upload CDK output
+        uses: actions/upload-artifact@v2
+        with:
+          name: cdk-out
+          path: infra/cdk.out
+          if-no-files-found: error
+
   deploy_to_prod:
     name: Deploy To Prod
     runs-on: ubuntu-latest
+    needs: build
     permissions:
       id-token: write
+    env:
+      AWS_REGION: us-east-1
+      AWS_ACCOUNT_ID: 590668874907
     steps:
+      - name: Download CDK output
+        uses: actions/download-artifact@v2
+        with:
+          name: cdk-out
+
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -59,4 +75,12 @@ jobs:
 
       - name: Install cdk
         run: npm install -g aws-cdk
-# TODO: capture synth output, deploy stuff
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/my-github-actions-role
+
+      - name: Deploy
+        run: cdk deploy 'ProdStage/*' --require-approval never
