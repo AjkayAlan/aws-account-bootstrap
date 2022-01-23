@@ -22,7 +22,7 @@ export class GitHubActionsCICDAccessStack extends cdk.Stack {
     const ghToAWSOIDC = new OpenIdConnectProvider(this, 'GitHubToAWSOIDCProvider', {
       url: `https://${domain}`,
       clientIds: ['sts.amazonaws.com'],
-      thumbprints: ['a031c46782e6e6c662c2c87c76da9aa62ccabd8e'],
+      thumbprints: ['6938fd4d98bab03faadb97b34396831e3780aea1'],
     });
 
     new Role(this, 'GitHubActionsCICDAccessRole', {
