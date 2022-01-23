@@ -36,6 +36,7 @@ export class GitHubActionsCICDAccessStack extends Stack {
       inlinePolicies: {
         'cicd-access': new PolicyDocument({
           statements: [
+            // Useful for bootstrapping and CDK v1
             new PolicyStatement({
               actions: ['cloudformation:*'],
               resources: ['*'],
@@ -51,9 +52,16 @@ export class GitHubActionsCICDAccessStack extends Stack {
                 },
               },
             }),
+            // CDK v1
             new PolicyStatement({
               actions: ['s3:*'],
               resources: ['arn:aws:s3:::cdktoolkit-stagingbucket-*'],
+              effect: Effect.ALLOW,
+            }),
+            // CDK v2
+            new PolicyStatement({
+              actions: ['sts:AssumeRole'],
+              resources: ['arn:aws:iam::*:role/cdk-*'],
               effect: Effect.ALLOW,
             }),
           ],
