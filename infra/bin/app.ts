@@ -2,11 +2,11 @@
 
 import 'source-map-support/register';
 
-import * as cdk from '@aws-cdk/core';
+import { App } from 'aws-cdk-lib';
 
 import { ProdStage } from '../lib/stages/prod-stage';
 
-export class App extends cdk.App {
+export class MyApp extends App {
   constructor() {
     super();
 
@@ -21,4 +21,4 @@ export class App extends cdk.App {
   }
 }
 
-new App().synth();
+new MyApp().synth();

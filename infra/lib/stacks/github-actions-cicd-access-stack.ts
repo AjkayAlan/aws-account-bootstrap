@@ -1,3 +1,4 @@
+import { Stack, StackProps } from 'aws-cdk-lib';
 import {
   Effect,
   OpenIdConnectProvider,
@@ -5,16 +6,16 @@ import {
   PolicyStatement,
   Role,
   WebIdentityPrincipal,
-} from '@aws-cdk/aws-iam';
-import * as cdk from '@aws-cdk/core';
+} from 'aws-cdk-lib/aws-iam';
+import { Construct } from 'constructs';
 
-export interface GitHubActionsCICDAccessStageProps extends cdk.StackProps {
+export interface GitHubActionsCICDAccessStageProps extends StackProps {
   repos: string[];
   cicdAccessRoleName: string;
 }
 
-export class GitHubActionsCICDAccessStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props: GitHubActionsCICDAccessStageProps) {
+export class GitHubActionsCICDAccessStack extends Stack {
+  constructor(scope: Construct, id: string, props: GitHubActionsCICDAccessStageProps) {
     super(scope, id, props);
 
     const domain = 'token.actions.githubusercontent.com';

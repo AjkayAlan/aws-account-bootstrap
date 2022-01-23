@@ -1,4 +1,5 @@
-import { Construct, Stage, StageProps } from '@aws-cdk/core';
+import { Stage, StageProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 
 import { GitHubActionsCICDAccessStack } from '../stacks/github-actions-cicd-access-stack';
 
