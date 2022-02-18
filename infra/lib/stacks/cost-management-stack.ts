@@ -33,7 +33,7 @@ export class CostManagementStack extends Stack {
           subscribers: [
             {
               address: props.budgetNotificationEmail,
-              subscriptionType: 'subscriptionType',
+              subscriptionType: 'EMAIL',
             },
           ],
         },
