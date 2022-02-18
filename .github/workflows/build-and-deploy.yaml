@@ -95,9 +95,5 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_ROLE_NAME }}
 
-      - name: Bootstrap
-        run: cdk bootstrap
-        working-directory: infra
-
       - name: Deploy
         run: cdk deploy --app 'cdk.out/' 'ProdStage/*' --require-approval never
