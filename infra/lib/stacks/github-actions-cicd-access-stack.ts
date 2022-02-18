@@ -29,8 +29,9 @@ export class GitHubActionsCICDAccessStack extends Stack {
     new Role(this, 'GitHubActionsCICDAccessRole', {
       roleName: props.cicdAccessRoleName,
       assumedBy: new WebIdentityPrincipal(ghToAWSOIDC.openIdConnectProviderArn, {
-        'ForAnyValue:StringLike': {
+        'ForAllValues:StringLike': {
           [`${domain}:sub`]: props.repos.map((repo) => `repo:${repo}:*`),
+          [`${domain}:aud`]: 'sts.amazonaws.com',
         },
       }),
       inlinePolicies: {
