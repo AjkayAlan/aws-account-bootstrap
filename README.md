@@ -11,6 +11,7 @@ All foundational things I need for my personal AWS account
    - Your account id (replace `590668874907`)
    - Your region (replace `us-east-1`)
    - Your repos that need access (remember to include your bootstrap repo name such as `AjkayAlan/aws-account-bootstrap`!)
+   - Your budget (if you want higher than 5 USD!)
 
 3. Update the [IAM Role policy](infra/lib/stacks/github-actions-cicd-access-stack.ts) to fit your needs
 
