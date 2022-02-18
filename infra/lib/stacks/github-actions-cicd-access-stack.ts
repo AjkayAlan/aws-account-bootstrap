@@ -9,13 +9,13 @@ import {
 } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
-export interface GitHubActionsCICDAccessStageProps extends StackProps {
-  repos: string[];
+export interface GitHubActionsCICDAccessStackProps extends StackProps {
+  cicdAccessRepos: string[];
   cicdAccessRoleName: string;
 }
 
 export class GitHubActionsCICDAccessStack extends Stack {
-  constructor(scope: Construct, id: string, props: GitHubActionsCICDAccessStageProps) {
+  constructor(scope: Construct, id: string, props: GitHubActionsCICDAccessStackProps) {
     super(scope, id, props);
 
     const domain = 'token.actions.githubusercontent.com';
@@ -28,9 +28,10 @@ export class GitHubActionsCICDAccessStack extends Stack {
 
     new Role(this, 'GitHubActionsCICDAccessRole', {
       roleName: props.cicdAccessRoleName,
+      // Only allows specified repos to assume, and only when it matches expected aud
       assumedBy: new WebIdentityPrincipal(ghToAWSOIDC.openIdConnectProviderArn, {
         'ForAllValues:StringLike': {
-          [`${domain}:sub`]: props.repos.map((repo) => `repo:${repo}:*`),
+          [`${domain}:sub`]: props.cicdAccessRepos.map((repo) => `repo:${repo}:*`),
           [`${domain}:aud`]: 'sts.amazonaws.com',
         },
       }),
@@ -59,7 +60,8 @@ export class GitHubActionsCICDAccessStack extends Stack {
               resources: ['arn:aws:s3:::cdktoolkit-stagingbucket-*'],
               effect: Effect.ALLOW,
             }),
-            // CDK v2
+            // CDK v2, including cross account assuming
+            // Could be more explicit here with the role names if you want
             new PolicyStatement({
               actions: ['sts:AssumeRole'],
               resources: ['arn:aws:iam::*:role/cdk-*'],

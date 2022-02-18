@@ -1,11 +1,14 @@
 import { Stage, StageProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
+import { CostManagementStack } from '../stacks/cost-management-stack';
 import { GitHubActionsCICDAccessStack } from '../stacks/github-actions-cicd-access-stack';
 
 export interface ProdStageProps extends StageProps {
-  repos: string[];
+  cicdAccessRepos: string[];
   cicdAccessRoleName: string;
+  budgetMonthlyUSDCost: number;
+  budgetNotificationEmail: string;
 }
 
 export class ProdStage extends Stage {
@@ -14,8 +17,13 @@ export class ProdStage extends Stage {
 
     new GitHubActionsCICDAccessStack(this, 'CICDAccessStack', {
       env: props.env,
-      repos: props.repos,
+      cicdAccessRepos: props.cicdAccessRepos,
       cicdAccessRoleName: props.cicdAccessRoleName,
+    });
+    new CostManagementStack(this, 'CostManagementStack', {
+      env: props.env,
+      budgetMonthlyUSDCost: props.budgetMonthlyUSDCost,
+      budgetNotificationEmail: props.budgetNotificationEmail,
     });
   }
 }

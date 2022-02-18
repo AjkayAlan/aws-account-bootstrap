@@ -41,6 +41,8 @@ jobs:
 
       - name: Synth
         run: cdk synth
+        env:
+          BUDGET_NOTIFICATION_EMAIL: ${{ secrets.BUDGET_NOTIFICATION_EMAIL }}
 
       - name: Upload CDK output
         uses: actions/upload-artifact@v2
@@ -88,6 +90,9 @@ jobs:
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_ROLE_NAME }}
+
+      - name: Bootstrap
+        run: cdk bootstrap
 
       - name: Deploy
         run: cdk deploy --app 'cdk.out/' 'ProdStage/*' --require-approval never
