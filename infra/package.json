@@ -8,12 +8,13 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
+    "test:update-snapshots": "jest -u",
     "cdk": "cdk",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --ext .ts . --fix"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.3",
+    "@types/jest": "^29.5.14",
     "@types/node": "18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
