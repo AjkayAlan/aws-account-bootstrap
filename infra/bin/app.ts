@@ -10,7 +10,7 @@ export class MyApp extends App {
     super();
 
     new ProdStage(this, 'ProdStage', {
-      cicdAccessRepos: ['AjkayAlan/aws-account-bootstrap', 'AjkayAlan/alankay.net-v2'],
+      cicdAccessRepos: ['AjkayAlan/aws-account-bootstrap'],
       cicdAccessRoleName: 'GitHubActionsCICDAccess',
       budgetMonthlyUSDCost: 5,
       budgetNotificationEmail: process.env.BUDGET_NOTIFICATION_EMAIL || 'name@example.com',

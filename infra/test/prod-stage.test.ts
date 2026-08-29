@@ -6,7 +6,7 @@ describe('ProdStage', () => {
   test('snapshot', () => {
     const app = new App();
     new ProdStage(app, 'ProdStage', {
-      cicdAccessRepos: ['AjkayAlan/aws-account-bootstrap', 'AjkayAlan/alankay.net-v2'],
+      cicdAccessRepos: ['AjkayAlan/aws-account-bootstrap'],
       cicdAccessRoleName: 'GitHubActionsCICDAccess',
       budgetMonthlyUSDCost: 5,
       budgetNotificationEmail: 'budget@example.com',
