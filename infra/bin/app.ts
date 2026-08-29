@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
-import 'source-map-support/register';
-
 import { App } from 'aws-cdk-lib';
+import 'source-map-support/register';
 
 import { ProdStage } from '../lib/stages/prod-stage';
 

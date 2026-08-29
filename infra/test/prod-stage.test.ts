@@ -17,14 +17,9 @@ describe('ProdStage', () => {
     });
 
     const assembly = app.synth();
-    const stackByName = (name: string) =>
-      assembly.stacksRecursively.find((s) => s.stackName === name)!;
+    const stackByName = (name: string) => assembly.stacksRecursively.find((s) => s.stackName === name)!;
 
-    expect(stackByName('ProdStage-CICDAccessStack').template).toMatchSnapshot(
-      'ProdStage-CICDAccessStack',
-    );
-    expect(stackByName('ProdStage-CostManagementStack').template).toMatchSnapshot(
-      'ProdStage-CostManagementStack',
-    );
+    expect(stackByName('ProdStage-CICDAccessStack').template).toMatchSnapshot('ProdStage-CICDAccessStack');
+    expect(stackByName('ProdStage-CostManagementStack').template).toMatchSnapshot('ProdStage-CostManagementStack');
   });
 });
