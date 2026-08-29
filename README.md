@@ -27,6 +27,26 @@ All foundational things I need for my personal AWS account
 
 After your stack deploys, the included github actions should work without issue for any subsequent updates.
 
+## Running the tests
+
+The stacks are covered by snapshot tests under [`infra/test`](infra/test). Run them from the `infra` directory:
+
+```sh
+cd infra
+npm test
+```
+
+### Updating snapshots
+
+When you intentionally change a stack, regenerate its snapshot with:
+
+```sh
+cd infra
+npm run test:update-snapshots
+```
+
+Review the diff of the updated `.snap` files before committing.
+
 ## Allowing other repos to deploy to your account
 
 Just add the repos to the list in the [app.ts](infra/bin/app.ts), and let the action run to deploy the update to your account.

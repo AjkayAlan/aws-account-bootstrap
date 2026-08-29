@@ -17,17 +17,14 @@ jobs:
         working-directory: infra
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v7
         with:
-          node-version: "lts/*"
+          node-version: "26"
           cache: "npm"
           cache-dependency-path: "infra/package-lock.json"
-
-      - name: Update npm
-        run: npm install -g npm
 
       - name: Install cdk
         run: npm install -g aws-cdk
@@ -47,7 +44,7 @@ jobs:
           BUDGET_NOTIFICATION_EMAIL: ${{ secrets.BUDGET_NOTIFICATION_EMAIL }}
 
       - name: Upload CDK output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         with:
           name: cdk.out
           path: infra/cdk.out
@@ -68,29 +65,26 @@ jobs:
     steps:
       # Include this for now cause NPM fails if nothing is checked out?
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Download CDK output
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v8
         with:
           name: cdk.out
           path: cdk.out
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v7
         with:
-          node-version: "lts/*"
+          node-version: "26"
           cache: "npm"
           cache-dependency-path: "infra/package-lock.json"
-
-      - name: Update npm
-        run: npm install -g npm
 
       - name: Install cdk
         run: npm install -g aws-cdk
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_ROLE_NAME }}
